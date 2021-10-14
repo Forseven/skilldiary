@@ -22,7 +22,7 @@ class Person(AbstractUser):
     activation_key_expires = models.DateTimeField(default=(now() + timedelta(hours=48)))
 
     def __str__(self):
-        return self.first_name
+        return self.username
 
     def is_activation_key_expired(self):
         if now() <= self.activation_key_expires:

@@ -7,6 +7,10 @@ class Profession(models.Model):
     description = models.CharField(max_length=128, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(
+        default=True,
+        help_text='Unselect this instead of deleting tasks.'
+    )
 
     def __str__(self):
         return self.name
@@ -30,13 +34,13 @@ class Course(models.Model):
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     status = models.CharField(
-        max_length=4,
-        choices=STATUS_CHOICES,
+        max_length=9,
+        choices=STATUS_CHOICES,blank=True, null=True
 
     )
     level = models.CharField(
         max_length=4,
-        choices=LEVEL_CHOICES,
+        choices=LEVEL_CHOICES,blank=True, null=True
 
     )
     rate = models.IntegerField(default=0, blank=True, null=True)
@@ -44,6 +48,10 @@ class Course(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     person = models.ForeignKey(Person, on_delete=models.PROTECT)
+    is_active = models.BooleanField(
+        default=True,
+        help_text='Unselect this instead of deleting tasks.'
+    )
 
     def __str__(self):
         return self.name
@@ -57,10 +65,10 @@ class Task(models.Model):
         ('COMPLETED', 'завершена'),
     ]
     name = models.CharField(max_length=128)
-    start_date = models.DateTimeField(blank=True, null=True)
-    end_date = models.DateTimeField(blank=True, null=True)
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
     status = models.CharField(
-        max_length=4,
+        max_length=9,
         choices=STATUS_CHOICES,
 
     )
