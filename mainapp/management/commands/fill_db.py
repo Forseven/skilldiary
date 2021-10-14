@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
-from mainapp.models import *
-from authapp.models import Person
+
+from authapp.models import *
+from skilldiary.settings import BASE_DIR
 
 JSON_PATH = 'mainapp/json'
 
@@ -10,4 +11,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Create superuser
-        super_user = Person.objects.create_superuser('skilldiary', 'root@localhost.local', '')
+        print(f'{BASE_DIR}/mainapp/data/city.txt')
+        with open(f'{BASE_DIR}/mainapp/data/city.txt',"r")as file:
+            citys = file.readlines()
+            for city in citys:
+                City.objects.get_or_create(name=city)
+
+            file.close()
+
+       # super_user = Person.objects.create_superuser('skilldiary', 'root@localhost.local', '')

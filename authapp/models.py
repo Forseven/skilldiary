@@ -14,7 +14,7 @@ class City(models.Model):
 class Person(AbstractUser):
     surname = models.CharField(max_length=128, blank=True,null=True)
     avatar = models.ImageField(upload_to='Person_avatars', blank=True)
-    age = models.PositiveIntegerField(verbose_name='age', default=18)
+    age = models.PositiveIntegerField(verbose_name='age', default=18,blank=True, null=True)
     city = models.ForeignKey(City, on_delete=models.PROTECT, blank=True, null=True)
     rate = models.ImageField(default=0, blank=True, null=True)
     activation_key = models.CharField(max_length=128, blank=True)

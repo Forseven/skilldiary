@@ -70,9 +70,22 @@ class File(models.Model):
     task = models.ForeignKey(Task, on_delete=models.PROTECT, blank=True, null=True)
     course = models.ForeignKey(Course, on_delete=models.PROTECT, blank=True, null=True)
 
+    @property
     def __str__(self):
         return self.name
 
+
+class AdditionalInfo(models.Model):
+    class File(models.Model):
+        name = models.CharField(max_length=128)
+        description = models.CharField(max_length=128, blank=True, null=True)
+        create_at = models.DateTimeField(auto_now_add=True)
+        update_at = models.DateTimeField(auto_now=True)
+        course = models.ForeignKey(Course, on_delete=models.PROTECT, blank=True, null=True)
+        is_active = models.BooleanField(
+            default=True,
+            help_text='Unselect this instead of deleting element.'
+        )
 
 class HeroText(models.Model):
     TEXT_CHOICES = [
@@ -95,7 +108,7 @@ class Hero(models.Model):
     image = models.ImageField(upload_to='Hero_images', blank=True)
     is_active = models.BooleanField(
         default=True,
-        help_text='Unselect this instead of deleting comments.'
+        help_text='Unselect this instead of deleting hero.'
     )
 
     def __str__(self):
