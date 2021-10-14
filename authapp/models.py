@@ -12,6 +12,7 @@ class City(models.Model):
 
 
 class Person(AbstractUser):
+    email = models.EmailField( max_length=128,unique=True)
     surname = models.CharField(max_length=128, blank=True,null=True)
     avatar = models.ImageField(upload_to='Person_avatars', blank=True)
     age = models.PositiveIntegerField(verbose_name='age', default=18,blank=True, null=True)
